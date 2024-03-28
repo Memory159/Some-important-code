@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阿里云OSS普通上传</title>
+</head>
+
+<body>
+    <input type="file" id="file">
+    <button>上传</button>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/aliyun-oss/6.9.0/aliyun-oss.min.js"></script> -->
+    <script src="https://gosspublic.alicdn.com/aliyun-oss-sdk-6.18.1.min.js"></script>
+    <script>
+        var oss = new OSS({
+            region: 'oss-cn-beijing', //oss存储区域 
+            accessKeyId: 'LTAI5t8dniNBsfitobGNxbfn', //accessKeyId
+            accessKeySecret: 'lbQ5rNjlOEpcDsNi7E38dmEWeNsrnS', //accessKeySecret
+            bucket: 'my-bucket-hxl' //存储空间名称
+        })
+
+        const upload = document.querySelector('button');
+        upload.addEventListener("click", () => {
+                // const file = document.querySelector('#file').files[0];
+                const data = file.files[0]
+                var fileSize = data.size; //文件大小
+                var filetType = data.type; //文件类型
+                //创建文件读取对象
+                if (fileSize <= 10240 * 1024) {
+                    if (filetType == "image/jpeg") {
+                        putObject(data)
+                        return;
+                    } else {
+                        this.$message.error("图片格式不正确");
+                    }
+                } else {
+                    this.$message.error("图片大小不正确");
+                }
+            })
+            // 上传图片
+        async function putObject(data) {
+            try {
+                const options = {
+                    meta: {
+                        temp: 'demo',
+                        mime: 'json',
+                        Headers: {
+                            "Content-Type": "text/plain"
+                        }
+                    },
+                }
+                const result = await oss.put(data.name, data, options)
+
+                // 获取文件地址，预览或者下载文件
+                oss.signatureUrl(data.name)
+                console.log(result);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
