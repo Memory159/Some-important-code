@@ -1,5 +1,5 @@
 # Some-important-code
-这里会不定期更新一些重要的代码，欢迎关注！
+这里会不定期更新一些重要的代码，期待你的关注！
 ## 防抖与节流
 ### 防抖
 防抖是什么: <br>
@@ -37,7 +37,7 @@
 在尤大大开发 Vue3 Composition API 主要考虑了以下两点： <br>
 1、对 Vue 社区调研，了解了许多使用 Vue 的开发者对于更好的组件逻辑组织方式的期望。 <br>
 2、对 React Hooks 和其他前端框架的解决方案进行了学习和借鉴。 <br>
-有了 composition API 意味着我们就可以自定义封装 hooks，最终的目的都是进行复用，在 Vue2 中复用的方式大部分都是采取 mixin，但相比 hooks，hooks 更清楚复用的功能来源及功能 
+有了 composition API 意味着我们就可以自定义封装 hooks，最终的目的都是进行复用，在 Vue2 中复用的方式大部分都是采取 [mixin](https://juejin.cn/post/7076340796361801759 "彻底搞懂Vue中的Mixin混入（保姆级教程）")，但相比 hooks，hooks 更清楚复用的功能来源及功能 
 
 ## 二、如何封装一个 hooks 函数
 - 例如实现一个点击按钮获取body的宽度和高度
