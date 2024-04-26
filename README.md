@@ -18,9 +18,9 @@
 2、ajax 提交
 
 ## 阿里云 OSS 
-### 阿里云oss是什么:
+### 一、阿里云oss是什么:
 是阿里云提供的对象存储服务，通过阿里云 OSS JavaScript SDK，前端开发者可以方便地在网页或者 Web 应用中实现上传、下载、管理对象等操作
-### 如何使用:
+### 二、如何使用:
 - 创建 OSS 存储空间: 在阿里云控制台中创建一个 OSS 存储空间，用于存储对象（文件）。
 - 获取 Access Key 和 Access Key Secret: 在阿里云控制台中，获取对应的 Access Key 和 Access Key Secret，用于通过 SDK 或 API 进行身份验证。
 - 安装阿里云 OSS SDK: 如果是 js,通过 npm 或 yarn 安装 ali-oss 包来使用阿里云 OSS SDK。如果是其他语言，也可以在相应的开发环境中安装对应的 SDK。
@@ -29,3 +29,49 @@
 - 处理权限和安全: 根据需求设置存储空间和对象的权限和安全策略，以确保数据的安全性和隐私性。
 - 处理错误和异常: 在使用阿里云 OSS SDK 过程中，要处理可能发生的错误和异常，保证程序的稳定性和可靠性。
 - 优化性能和成本: 根据实际需求和使用情况，优化对象存储的性能和成本，可以通过设置存储类型、生命周期规则、CDN 加速等方式来提升性能和降低成本。
+
+## hooks函数
+### 一、什么是hooks函数
+**专业解释：Vue3中的 Hooks 函数是一种用于在组件中共享可复用逻辑的方式。**
+**大白话：将单独功能的 js 代码抽离出来，加工成公共函数，从而达到逻辑复用。**
+在尤大大开发 Vue3 Composition API 主要考虑了以下两点：
+1、对 Vue 社区调研，了解了许多使用 Vue 的开发者对于更好的组件逻辑组织方式的期望。
+2、对 React Hooks 和其他前端框架的解决方案进行了学习和借鉴。
+有了 composition API 意味着我们就可以自定义封装 hooks，最终的目的都是进行复用，在 Vue2 中复用的方式大部分都是采取 mixin，但相比 hooks，hooks 更清楚复用的功能来源及功能
+
+## 二、如何封装一个 hooks 函数
+- 例如实现一个点击按钮获取body的宽度和高度
+```js
+<script setup lang="ts">
+import { reactive } from "vue";
+ 
+const data = reactive({
+  width: 0,
+  height:0
+})
+ 
+const getViewportSize = () => {
+  data.width = document.body.clientWidth;
+  data.height = document.body.clientHeight;
+}
+</script>
+ 
+<template>
+  <button @click="getViewportSize" > 获取窗口大小 </button>
+    <div>
+      <div>宽度 ： {{data.width}}</div>
+      <div>宽度 ： {{data.height}}</div>
+    </div>
+</template>
+```
+抽离逻辑，封装成 hooks 函数
+**hooks 封装规范**
+1、新建 hooks 文件
+2、函数名前缀加上 ues
+3、合理利用 Vue 提供的响应式函数及生命周期
+4、暴露出 变量 和 方法 提供外部需要时使用
+
+## 三、Hooks 常用 Demo
+**1、验证码倒计时**
+**2、防抖**
+**3、节流**
